@@ -11,6 +11,8 @@ namespace SCP_report
         public Interactions() {}
 
         public User login() {
+            Console.Clear();
+            Console.WriteLine("----- WELCOME TO THE SCP FOUNDATION -----");
             int tryRemaining = Config.LOGIN_TRY_MAX;
             bool shouldContinue = true;
             while (shouldContinue) {
@@ -45,33 +47,25 @@ namespace SCP_report
             Console.Write("----- CHOOSE AN ACTION -----");
 
             Console.Write("\n1. User management");
-            Console.Write("\n2. SCP management (Not implemented yet)");
+            Console.Write("\n2. SCP management");
             Console.Write("\n3. Wiki");
-            Console.Write("\n\n\n0. Exit\n-->");
-            string actionChoosed = Console.ReadLine();
-            if (int.TryParse(actionChoosed, out _)) {
-                int action = Convert.ToInt32(actionChoosed);
-                switch (action) {
-                    case 1:
-                        this.displayUserManagement();
-                        break;
-                    case 2:
-                        //this.displaySCPManagement();
-                        break;
-                    case 3:
-                        this.displayWiki();
-                        break;
-                    default:
-                        Console.Clear();
-                        Console.Write("Goodbye.");
-                        Environment.Exit(0);
-                        break;
-                }
-            } else {
-                Misc.displayColoredMessage("Error, please enter a valid value. Redirecting...", ConsoleColor.Red);
-                System.Threading.Thread.Sleep(1500);
-                this.chooseAction();
-                return;
+            Console.Write("\n\n\n0. Disconnect\n-->");
+            int action = Convert.ToInt32(Misc.retryEntryUntilGood("", "int", "", "Error. Value not allowed, try again.", "0"));
+            switch (action) {
+                case 1:
+                    this.displayUserManagement();
+                    break;
+                case 2:
+                    this.displaySCPManagement();
+                    break;
+                case 3:
+                    this.displayWiki();
+                    break;
+                default:
+                    Console.Clear();
+                    Console.Write("Goodbye.");
+                    Environment.Exit(0);
+                    break;
             }
         }
 
@@ -84,7 +78,7 @@ namespace SCP_report
             Console.Write("\n4. User deletion");
             Console.Write("\n5. User list");
             Console.Write("\n\n\n0. Go back\n-->");
-            int action = Convert.ToInt32(Console.ReadLine());
+            int action = Convert.ToInt32(Misc.retryEntryUntilGood("", "int", "", "Error. Value not allowed, try again.", "0"));
 
             Interactions_User iu = new Interactions_User(this.currentUser, this);
             switch (action) {
@@ -107,7 +101,40 @@ namespace SCP_report
                     this.chooseAction();
                     break;
             }
+        }
 
+        public void displaySCPManagement() {
+            Console.Clear();
+            Console.Write("----- SCP MANAGEMENT -----");
+            Console.Write("\n1. SCP creation");
+            Console.Write("\n2. SCP modification (Not implemented yet)");
+            Console.Write("\n3. SCP find (Not implemented yet)");
+            Console.Write("\n4. SCP deletion (Not implemented yet)");
+            Console.Write("\n5. SCP list");
+            Console.Write("\n\n\n0. Go back\n-->");
+            int action = Convert.ToInt32(Misc.retryEntryUntilGood("", "int", "", "Error. Value not allowed, try again.", "0"));
+
+            Interactions_SCP iscp = new Interactions_SCP(this.currentUser, this);
+            switch (action) {
+                case 1:
+                    iscp.scp_NewScp();
+                    break;
+                case 2:
+                    //iscp.scp_Edit();
+                    break;
+                case 3:
+                    //iscp.scp_Find();
+                    break;
+                case 4:
+                    //iscp.scp_Delete();
+                    break;
+                case 5:
+                    iscp.scp_List();
+                    break;
+                default:
+                    this.chooseAction();
+                    break;
+            }
         }
 
         public void displayWiki() {
@@ -115,15 +142,14 @@ namespace SCP_report
             Console.Write("----- WIKI -----");
             Console.Write("\n1. Users (Not implemented yet)");
             Console.Write("\n2. SCP (Not implemented yet)");
-            Console.Write("\n3. Classification (Not implemented yet)");
+            Console.Write("\n3. Classification");
             Console.Write("\n\n\n0. Go back\n-->");
-            int action = Convert.ToInt32(Console.ReadLine());
+            int action = Convert.ToInt32(Misc.retryEntryUntilGood("", "int", "", "Error. Value not allowed, try again.", "0"));
 
             Interactions_Wiki ik = new Interactions_Wiki(this.currentUser, this);
-            switch (action)
-            {
+            switch (action) {
                 case 1:
-                    ik.wiki_Users();
+                    //ik.wiki_Users();
                     break;
                 case 2:
                     //ik.user_Edit();

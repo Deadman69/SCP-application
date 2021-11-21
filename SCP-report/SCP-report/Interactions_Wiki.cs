@@ -34,7 +34,7 @@ namespace SCP_report
                     this.wiki_Classification_Users();
                     break;
                 case 2:
-                    //this.wiki_Classification_SCP();
+                    this.wiki_Classification_SCP();
                     break;
                 default:
                     this.parentElement.chooseAction();
@@ -61,7 +61,24 @@ namespace SCP_report
 
             Console.Write("\n\nPress any key to exit");
             Console.ReadKey();
-            this.parentElement.displayWiki();
+            this.wiki_Classification();
+        }
+
+        public void wiki_Classification_SCP()
+        {
+            Console.Clear();
+            Console.WriteLine("------ WIKI - SCP CLASSIFICATION ------");
+            Console.Write("\nThe classification of a scp is not representative of their danger but of the difficulty to contain them.");
+            Console.Write("\n\nFive classification levels exist for SCP :");
+            Console.Write("\n   1 : Safe\n      Assigned to an object easily contained such as a simple metal door and about wich we know how to contain them.");
+            Console.Write("\n   2 : Euclid\n      Assigned to entities that need a specific containment but could hardly escape if the protocol is respected.");
+            Console.Write("\n   3 : Keter\n      Assigned to SCP's that are really difficult or impossible to contain.");
+            Console.Write("\n   4 : Thaumiel\n      Used for SCP's that allow to contain other SCP's.");
+            Console.Write("\n   5 : Neutralized\n      Used for SCP's wich have been destroyed or to wich powers have been removed.");
+
+            Console.Write("\n\nPress any key to exit");
+            Console.ReadKey();
+            this.wiki_Classification();
         }
     }
 }

@@ -50,8 +50,7 @@ namespace SCP_report
             string password = Console.ReadLine();
             userToRegister.password = password;
             Console.Write("Accreditation : ");
-            int accreditation = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(accreditation + " - " + this.currentUser.ToString());
+            int accreditation = Convert.ToInt32(Misc.retryEntryUntilGood("", "int", "", "Error. Value not allowed, try again.", "0"));
             if (accreditation > this.currentUser.accreditation)
             {
                 Misc.displayColoredMessage("\nYou can't create a user with greater accreditation than you. Aborted.", ConsoleColor.Red);
